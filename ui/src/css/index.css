@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Silka";
+  font-weight: 400;
+  src: url("../fonts/silka-regular-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Silka";
+  font-weight: 500;
+  src: url("../fonts/silka-medium-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Silka";
+  font-weight: 600;
+  src: url("../fonts/silka-semibold-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Silka";
+  font-weight: 700;
+  src: url("../fonts/silka-bold-webfont.woff2") format("woff2");
+}
+
+:root {
+  --header: 5rem;
+  scroll-padding-top: calc(1rem + var(--header));
+}
+
+@layer components {
+  .icon {
+    @apply inline align-middle pointer-events-none;
+    height: 1em;
+  }
+
+  .nav-tree-item {
+    @apply flex-grow p-2 cursor-pointer;
+  }
+
+  .main-side-column {
+    @apply py-10 overflow-auto self-start top-header lg:sticky lg:h-[calc(100vh-var(--header))];
+  }
+
+  .readme-notice {
+    @apply hidden;
+  }
+
+  .search-result-dropdown-menu {
+    @apply absolute overflow-auto top-[calc(100%+theme('spacing.2'))] max-h-[calc(90vh-var(--header))] w-[500px] border rounded shadow bg-white;
+
+    &:empty {
+      @apply hidden;
+    }
+  }
+
+  .search-result-dataset {
+    @apply space-y-1 p-3;
+  }
+
+  .search-result-component-header {
+    @apply font-bold pb-1 border-b;
+  }
+
+  .search-result-item {
+    @apply py-2 grid grid-cols-3 gap-2 items-baseline;
+  }
+
+  .search-result-document-title {
+    @apply text-right;
+  }
+
+  .search-result-document-hit {
+    @apply col-span-2;
+
+    & > a {
+      @apply p-2 border-l block break-words text-slate-800 hover:bg-slate-50;
+    }
+  }
+
+  .search-result-section-title {
+    @apply text-black;
+  }
+
+  .search-result-highlight {
+    @apply rounded ring ring-sky-600/10 bg-sky-50 text-sky-800 font-bold;
+  }
+}
+
+/* Outside of @layer because we don't want this to be tree-shaken away. */
+.section-bg {
+  @apply relative py-4;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: calc(50% - 50vw);
+    width: 100vw;
+    height: 100%;
+    z-index: -10;
+    background-color: var(--bg-color, theme('colors.slate.50'));
+  }
+}

@@ -1,7 +1,9 @@
 antoraVersion: '1.0.0'
-env: []
+env:
+  SITE_SEARCH_PROVIDER: true
 site:
   title: OpenZeppelin Docs
+  url: http://localhost:8080
   ui:
     url: /_
   components:
@@ -40,10 +42,11 @@ site:
     contracts:
       &component_contracts
       name: contracts
-      title: Contracts
+      title: &component_title Contracts
       url: /contracts/2.x/index.html
       versions:
       - &latest_version_contracts
+        title: *component_title
         url: /contracts/2.x/index.html
         version: '2.x'
         displayVersion: '2.x'
@@ -208,8 +211,6 @@ page:
       items:
       - &item
         content: ERC20
-        url: /contracts/2.x/api.html
-        urlType: internal
         items:
         - <<: *item
           content: ERC20 Supply
@@ -229,8 +230,11 @@ page:
       url: '#'
     - content: Releases
       url: '#'
-    - content: API Reference
-      url: '/contracts/2.x/api.html' 
+  - content: API Reference
+    items:
+      - <<: *item
+        content: ERC20
+        url: '/contracts/2.x/api.html' 
   previous:
     content: Getting Started
     url: /contracts/2.x/index.html
